@@ -29,6 +29,34 @@
            font-size: 35px;
            font-family: "Helvetica","Arial",sans-serif;
        }
+       
+       .map { 
+           height: 100%;
+       }
+       
+       .map_card {
+    /*display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    min-height: 200px;
+    z-index: 1;
+    box-sizing: border-box;
+    overflow: hidden;*/
+    
+    width: 100%%;
+    height:65%;
+    padding: 10px;
+    background: #000;
+    border-radius: 2px;
+}
         
  </style>
     
@@ -63,7 +91,9 @@
             <section class="mdl-layout__tab-panel" id="fixed-tab-2">
                 <div class="page-content">
 <!-- TAB_2 || RUN  -->
-                    
+                    <div class="map_card">
+                    <div class="map" id="map"></div>
+                    </div>
                     
                     
                 </div>
@@ -82,6 +112,26 @@
 
 </body>
 <script>
-</script>
+    
+    
+    var map;
 
+        function initMap() {
+
+            //Actual Map
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: -37.9120467,
+                    lng: 145.1343136
+                },
+                zoom: 17
+            });
+
+        } //END INITMAP
+    
+    
+    
+    
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
 </html>
