@@ -1,16 +1,25 @@
 <html>
 
 <head>
-    <!-- Material Design Lite -->
+    <!-- Material Design Lite Link -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
-    <!-- Material Design icon font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+    <!-- jQuery Link-->
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
-    <LINK rel="stylesheet" href="css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
+        
+        <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
     
+        <!-- jScript Link -->
+        <script src="js/view_functions.js"></script>
+    
+    <!-- Css Link -->
+    <link rel="stylesheet" href="css/styles.css">
+        
+        
    <style>
     .title {
         text-align: center;
@@ -20,7 +29,11 @@
         line-height: 1;
         letter-spacing: 0.2em;
         font-weight: 200;
-    }  
+    }
+       
+       .table {
+           padding: 5%;
+       }
  </style>
     <style></style>
 </head>
@@ -46,7 +59,8 @@
                 <div class="page-content">
 <!-- TAB_3 || History  -->
                     
-                    <table id="example" class="display" width="100%"></table>
+                    <div class="table"><table id="example" class="display" width="100%"></table></div>
+                    
                     
                     
                 </div>
@@ -100,17 +114,16 @@ $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,
         columns: [
-            { title: "Name" },
-            { title: "Position" },
-            { title: "Office" },
-            { title: "Extn." },
-            { title: "Start date" },
-            { title: "Salary" }
+            { title: "Date" },
+            { title: "Time Started" },
+            { title: "Time Finished" },
+            { title: "Duration" },
+            { title: "Distance" },
+            { title: "Av. Speed" }
         ]
     } );
 } );
     
     </script>
     
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
 </html>
