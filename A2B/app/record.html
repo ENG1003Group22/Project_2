@@ -9,7 +9,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
     
     <!-- jScript Link -->
-        <script src="js/record_functions.js"></script>
+        <script src="js/code.js"></script>
     
     <!-- Css Link -->
     <link rel="stylesheet" href="css/styles.css">
@@ -100,7 +100,7 @@
                     
                     <div class="card_holder">
                     <div class="button_card"></div>
-                    <div class="display_card"></div>
+                    <div class="display_card" ><span id="coordsdisp"></span></div>
                     </div>
                 </div>
             </section>
@@ -112,12 +112,31 @@
 <script>
     var map;
 
+    
+var coordsdisp = document.getElementById("coordsdisp");
+    
+    getLocation()
+    
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition)} 
+    else {
+        coordsdisp.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+    
+function showPosition(position) {
+    coordsdisp.innerHTML = "Latitude: " + position.coords.latitude +"<br>Longitude: " + position.coords.longitude;
+    
+    console.log("Latitude: " + position.coords.latitude +"<br>Longitude: " + position.coords.longitude)
+}
+    
         function initMap() {
             //Actual Map -- https://developers.google.com/maps/documentation/javascript/
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {
-                    lat: -37.9120467,
-                    lng: 145.1343136
+                    lat: -37.8749147,
+                    lng: 145.0468735
                 },
                 zoom: 17
             });
