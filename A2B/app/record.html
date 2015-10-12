@@ -109,44 +109,5 @@
 
 
 </body>
-<script>
-    var map;
 
-    
-var coordsdisp = document.getElementById("coordsdisp");
-    
-    getLocation()
-    
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition)} 
-    else {
-        coordsdisp.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-    
-function showPosition(position) {
-    coordsdisp.innerHTML = "Latitude: " + position.coords.latitude +"<br>Longitude: " + position.coords.longitude;
-    
-    console.log("Latitude: " + position.coords.latitude +"<br>Longitude: " + position.coords.longitude)
-}
-    
-        function initMap() {
-            //Actual Map -- https://developers.google.com/maps/documentation/javascript/
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: -37.8749147,
-                    lng: 145.0468735
-                },
-                zoom: 17
-            });
-            
-            //var abc = document.getElementById('abc');
-            //abc.className = "abc"
-        } //END INITMAP
-    
-    
-    
-    
-</script>
 </html>

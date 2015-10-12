@@ -18,8 +18,8 @@ function initMap() {
             //Actual Map -- https://developers.google.com/maps/documentation/javascript/
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {
-                    lat: currentPosition.lat,
-                    lng: currentPosition.lng
+                    lat: -37.8749147,
+                    lng: 145.0468735
                 },
                 zoom: 17
             });
@@ -34,13 +34,15 @@ function initMap() {
      var tracking;
      
         if(isTracking === true){
-            clearInterval(tracking);
+            clearInterval(tracking); // Stops the time interval from repeating the Tracking Function
             isTracking = false;
             button1.innerHTML = "Start";
+            saveToMemory(route); //Saves to memory for use in the "history" tab
+            route = []; // Clears the route so that anothing route can be recorded
 		}
         else{
             isTracking = true;
-            trackingLocation(route, timeInterval);
+            trackingLocation(route, timeInterval); //Starting tracking the position at the timeInterval
             button1.innerHTML = "Stop";
         }
     
@@ -78,13 +80,13 @@ function addLocAndUpdate(route){
     }
 
     
-function showPosition() {
+function showPosition(position) {
     var lat, lng, returnObject;
     
     lat = position.coords.latitude;
     lng = position.coords.longitude;
     
-    returnObject = {lat: latitude, lng: longitude};
+    returnObject = {lat: lat, lng: lng};
     
     return returnObject;
 
