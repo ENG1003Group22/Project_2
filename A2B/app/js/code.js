@@ -43,9 +43,10 @@ function trackLocation(){
     lng:Number(position.coords.longitude),
     //acc:Number(position.coords.accuracy),
     time:time()};
-     
-    document.getElementById("outputArea").innerHTML="Lat: "+currentLoc.lat+"</br>Lng: "+currentLoc.lng+"</br>Route: "+route.length; 
-     
+    
+    document.getElementById("outputArea").innerHTML="</br>Lat: "+currentLoc.lat+"</br></br>Lng: "+currentLoc.lng;
+    document.getElementById("RLOutput").innerHTML="</br>Route Length: " + route.length;
+    
     route.push(currentLoc);
     displayPath(route);
     console.log(currentLoc);
@@ -97,12 +98,19 @@ function trackingToggle(){
     function displayPath(route){
     var path, coords, startPoint;
     
+        //Puts a marker at the start point
     startPoint = new google.maps.Marker({
                 position: route[0],
                 map: map,
                 title: "Start Point"
             });
     
+        //pans to the newest location
+        var view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
+        // makes a latlng that google needs
+        map.panTo(view); //pans to new point
+        
+        //plots the updated path
     coords = route.slice()
     coords.splice(coords.length,0, coords[coords.length - 1])
     
@@ -129,7 +137,6 @@ function trackingToggle(){
         title: "End Point"
     })
 }//END endMarker
-
             
 function totalDistance(route){
     var distance = 0;
@@ -171,8 +178,27 @@ function averageSpeed(time, distance){
     
 }
 
+function calloriesBurnt(){}
+
 
 function saveToMemory(route){
+    var name;
+    
+    // check for a route then save it to LocalStorage using JSON.stringify
+    
+    //Check if the route is ongoing
+    if (isTracking == true) {
+        	console.log('Please stop tracking before exiting');
+        	return false;
+        }
+    //Enter a name for saving the route
+    
+    name = XXX
+    
+    //the object to be stored
+    var store = {
+    			name: name,
+    			route: route};
     
 }
 

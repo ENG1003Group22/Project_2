@@ -74,7 +74,8 @@
     background: rgb(158, 158, 158);
     border-radius: 2px;
     float: right;
-        margin: 20px
+        margin: 20px;
+    
 }
        
         
@@ -83,6 +84,23 @@
         width:100px; 
         margin:20px;
            background: rgb(63,81,181);
+       }
+       
+       .textOutputArea{
+           float: right; 
+           background: rgb(76, 175, 80); 
+           height:100px; 
+           width:400px; 
+           margin:20px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+           color:rgb(255,255,255);
+           align-content: center;
+           text-align: center;
+           
        }
  </style>
     
@@ -128,9 +146,24 @@
                         
                         
                         </div>
-                        
+                        <!--  OutputArea-->
                         <div class="display_card">
-                    <span id="outputArea" style="float: right; background: rgb(76, 175, 80); height:100px; width:800px; margin:20px">abc</span>
+                    
+                            
+                            <!--  Textfield -->
+                    <span class= "textOutputArea">
+<form action="#">
+  <span class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="sample1" />
+    <label class="mdl-textfield__label" for="sample1" style="color:rgb(255,255,255);text-align:center">Name...</label><span id="RLOutput"></br>Route Length:</span>
+  </span>
+</form>
+</span>    
+                            
+                            <span id="outputArea" class= "textOutputArea">
+                        <span ></br>Lat: </br></br>Lng: </span></span>
+                            
+                            
                     </div>
                         
                    
