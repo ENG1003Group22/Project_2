@@ -81,14 +81,14 @@
         
        .button{
         height:100px; 
-        width:100px; 
+        width:250px; 
         margin:20px;
            background: rgb(63,81,181);
        }
        
        .textOutputArea{
            float: right; 
-           background: rgb(76, 175, 80); 
+           background: rgb(33, 150, 243); 
            height:100px; 
            width:400px; 
            margin:20px;
@@ -100,6 +100,9 @@
            color:rgb(255,255,255);
            align-content: center;
            text-align: center;
+           border-style: solid;
+           border-width: 1px;
+           border-color:black;
            
        }
  </style>
@@ -136,11 +139,11 @@
                         </span>
                         <!-- Clear Button  -->
                         <span>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:100px; margin:20px;" onclick="trackLocation()">TestLoc</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:250px; margin:20px;" onclick="trackLocation()">TestLoc</button>
                         </span>
                         <!-- Save Button  -->
                         <span>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:100px; margin:20px" onclick="displayPath(route)">Display</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:250px; margin:20px" onclick="displayPath(route)">Display</button>
                         </span>
                         
                         
@@ -151,11 +154,11 @@
                     
                             
                             <!--  Textfield -->
-                    <span class= "textOutputArea">
+                    <span id="outputArea" class= "textOutputArea">
 <form action="#">
   <span class="mdl-textfield mdl-js-textfield">
-    <input class="mdl-textfield__input" type="text" id="sample1" />
-    <label class="mdl-textfield__label" for="sample1" style="color:rgb(255,255,255);text-align:center">Name...</label><span id="RLOutput"></br>Route Length:</span>
+    <input class="mdl-textfield__input" type="text" id="input1" />
+    <label class="mdl-textfield__label" for="sample1" style="color:rgb(255,255,255);text-align: center">Name...</label><span id="RLOutput"></br>Route Length:</span>
   </span>
 </form>
 </span>    

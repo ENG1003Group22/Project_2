@@ -5,11 +5,9 @@ var route = [];
 var allowedAccuracy = 0;
 var simplifiedDistance = 25;
 var map; //The map from Google Maps API
-var trackID;
+var trackID,name;
 
 //var button1 = document.getElementById("SSButton").innerHTML;
-
-
 
 //document.getElementById("outputArea").innerHTML = "jkgiklgiuyyg";
 
@@ -178,7 +176,14 @@ function averageSpeed(time, distance){
     
 }
 
-function calloriesBurnt(){}
+function calloriesBurnt(duration){
+    var m = 75; //average weight = ~75kg
+    var calBurn;
+    
+    calBurn = m*duration*0.12*(1/60) //to convert to minutes
+    
+    return calBurn;
+}
 
 
 function saveToMemory(route){
@@ -193,12 +198,16 @@ function saveToMemory(route){
         }
     //Enter a name for saving the route
     
-    name = XXX
+    //name = document.getElementById("input1").innerHTML
     
     //the object to be stored
     var store = {
     			name: name,
     			route: route};
+    //Storing the object
+    localStorage.setItem('Route' + localStorage.length, JSON.stringidy(store));
+    
+    return true
     
 }
 
