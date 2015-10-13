@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <title>Run</title>
     <!-- Material Design Lite -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
@@ -48,30 +49,41 @@
     width: 100%%;
     height:65%;
     padding: 10px;
-    background: #43ce4c;
+    background: rgb(76, 175, 80);
     border-radius: 2px;
 }
+      .card_holder{
+            float: right;
+           width: 100%;
+           background: rgb(63,81,181)
+           
+       }
        
        .button_card {
-    width: 40%;
-    height:20%;
-    background: rgb(255, 153, 51);
+    width: auto;
+    height:auto;
+    background: rgb(158, 158, 158);
     border-radius: 2px;
-           float: left
+           float: left;
+           margin: 20px;
 }
        
        .display_card{
-    width: 60%;
-    height:20%;
-    background: rgb(255, 153, 204);
+    width: auto;
+    height:auto;
+    background: rgb(158, 158, 158);
     border-radius: 2px;
-    float: right
+    float: right;
+        margin: 20px
 }
-       .card_holder{
-            float: right;
-           width: 100%;
-       }
+       
         
+       .button{
+        height:100px; 
+        width:100px; 
+        margin:20px;
+           background: rgb(63,81,181);
+       }
  </style>
     
 </head>
@@ -99,8 +111,29 @@
                     <div class="map_card"><div class="map" id="map"></div></div>
                     
                     <div class="card_holder">
-                    <div class="button_card"></div>
-                    <div class="display_card" ><span id="coordsdisp"></span></div>
+                    <div class="button_card">
+                    <!-- Start and Stop Button  -->
+                        <span>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" id="SSButton" onclick="trackingToggle()" style="background:rgb(76, 175, 80)">Start</button>
+                        </span>
+                        <!-- Clear Button  -->
+                        <span>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:100px; margin:20px;" onclick="addLocation()">TestLoc</button>
+                        </span>
+                        <!-- Save Button  -->
+                        <span>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:100px; margin:20px">Save</button>
+                        </span>
+                        
+                        
+                        
+                        </div>
+                        
+                        <div class="display_card">
+                    <span id="outputArea" style="float: right; background: rgb(76, 175, 80); height:100px; width:800px; margin:20px">abc</span>
+                    </div>
+                        
+                   
                     </div>
                 </div>
             </section>
