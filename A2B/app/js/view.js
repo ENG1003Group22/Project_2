@@ -118,7 +118,7 @@ function button1(){
             'selectRows',
             'selectColumns',
             'selectCells'
-        ],
+        ]
 }
 
 
