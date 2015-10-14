@@ -3,8 +3,18 @@
 //Set Data_Stored Equal to dataSet
 
 var dataSet = [
-    [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],
-    [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+    {date: "12/10/2015",time: "10am", duration:"10.5mins",distance:"2km", aspeed:"5",cburn:"600",route:[
+            {
+                lat: -37.9128781,
+                lng: 145.1362585
+            }, {
+                lat: -37.912641,
+                lng: 145.1308405
+            }, {
+                lat: -37.9092552,
+                lng: 145.1338553
+            }]}
+    /*[ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
     [ "Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28", "$162,700" ],
@@ -38,22 +48,25 @@ var dataSet = [
     [ "Prescott Bartlett", "Technical Author", "London", "3606", "2011/05/07", "$145,000" ],
     [ "Gavin Cortez", "Team Leader", "San Francisco", "2860", "2008/10/26", "$235,500" ],
     [ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240", "2011/03/09", "$324,050" ],
-    [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
+    [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]*/
 ];
  
 
 $(document).ready(function(){
     table =  $('#myTable').DataTable({
         dom: 'Bfrtip',
-        data: dataSet,
+        "ajaxSource":"objects.txt.",
         lengthChange: false,
         buttons: [
             {
                 text: 'Display',
                 action: function () {
-                    var count = table.rows( { selected: true } ).count();
+                    var route = table.rows( { selected: true } );
+                    
+                    console.log(route)
+                    //console.log(route[4])
  
-                    events.prepend( '<div>'+count+' row(s) selected</div>' );
+                    document.getElementById("outputArea").innerHTML = route[4];
                 }
                 },
             {
@@ -73,13 +86,13 @@ $(document).ready(function(){
         
         //buttons: ['copy','excel','pdf'],
         
-        columns: [
-            { title: "Date" },
-            { title: "Time Started" },
-            { title: "Duration" },
-            { title: "Distance" },
-            { title: "Av. Speed" },
-            { title: "Calories Burnt" }
+        "columns": [
+            { "data": "name" },
+            { "data": "position" },
+            { "data": "office" },
+            { "data": "extn" },
+            { "data": "start_date" },
+            { "data": "salary" }
         ]});
     
     $('#button').click( function () {
@@ -90,8 +103,9 @@ $(document).ready(function(){
 } );
 
 
-
-
+//https://datatables.net/examples/ajax/objects.html
+//https://datatables.net/reference/option/columns.data
+//https://datatables.net/examples/data_sources/js_array.html
 function button1(){
     
     alert(table.rows('.selected').data().length+' row(s) selected')
