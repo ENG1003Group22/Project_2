@@ -1,10 +1,16 @@
 //variables Common to all functions
 var isTracking = false; //The Website will start tracking the user
-var route = [];
+var route = [
+                {lat: -37.8749511, lng: 145.0469304, acc: 30, time: 1444815293599},
+                {lat: -37.8749611, lng: 145.0464004, acc: 30, time: 1444815293599},
+                {lat: -37.8749711, lng: 145.0469704, acc: 30, time: 1444815293599},
+                {lat: -37.8749911, lng: 145.0469404, acc: 30, time: 1444815293599},
+                {lat: -37.8136, lng: 144.9631, acc: 30, time: 1444870000000},
+                ];
 //var timeInterval = 1; //seconds
 var allowedAccuracy = 0;
 var simplifiedDistance = 25;
-var map, path, markers=[]; //The map from Google Maps API  
+var map, path, markers=[], paths=[]; //The map from Google Maps API  
 var trackID,name;
 
 var testRoute = [
@@ -101,17 +107,18 @@ function trackingToggle(){
     var coords, view, startPoint;
     
         //Puts a marker at the start point
-    startPoint = new google.maps.Marker({
+        startPoint = new google.maps.Marker({
                 position: route[0],
                 map: map
             });
         //Pushes startPoint into an array so it can be deleted
         markers.push(startPoint);
     
-        //pans to the newest location
-        view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
+        
         // makes a latlng that google needs
-        map.panTo(view); //pans to new point
+        view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
+        //pans to new point
+        map.panTo(view); 
         
         //plots the updated path
     coords = route.slice()
@@ -125,8 +132,12 @@ function trackingToggle(){
                 fillColor:'#FF0000',
                 fillOpacity:1
             });
-
-            path.setMap(map);
+            
+        //Push path into array so that it can be deleted
+        paths.push(path);
+        
+        //Display path
+        path.setMap(map);
 
 }//END displayPath
     
@@ -145,16 +156,20 @@ function clearMap(){
     console.log("Cleared Map");
     
     //Clears markers
-    setMapOnAll(null);
+    setMapOnAll(markers, null);
     markers = [];
     
     //Clear Polyline
     path.setMap(null);
+    setMapOnAll(paths, null)
+    paths = [];
     
-    function setMapOnAll(gmap) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(gmap);
-  }}
+    
+    function setMapOnAll(array, gmap) {
+    for (i in array) {
+        array[i].setMap(gmap);
+        }
+    }
 }//END clearMap()
             
 function totalDistance(route){
@@ -210,7 +225,7 @@ function totalDistance(route){
 	}
         
         
-    }
+}
 
 
 function duration(route){
@@ -249,10 +264,8 @@ function saveToMemory(){
     
     
     
-    //document.getElementById("input1").innerHTML;
-    //document.getElementById("outputSave").innerHTML;
-    
-    //document.getElementById("outputSave").innerHTML = "Test";
+    //inputSave = document.getElementById("input1").innerHTML;
+    //outputSave = document.getElementById("outputSave").innerHTML;
     
     // check for a route then save it to LocalStorage using JSON.stringify
     if (route == []){
@@ -267,12 +280,14 @@ function saveToMemory(){
     }
     
     //Check That a name for the Route has been Entered
-    if (document.getElementById("input1").innerHTML === ""){
+    if (document.getElementById("input1").value == ""){
     document.getElementById("outputSave").innerHTML = "Please enter a Name";
+        console.log(document.getElementById("input1").innerHTML);
     return;
     }
     else{
-     name = document.getElementById("input1").innerHTML;   
+     name = document.getElementById("input1").value;   
+        console.log(name);
     }
     
     //Values added to the stored Route to be displayed\
