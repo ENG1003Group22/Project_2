@@ -4,12 +4,17 @@ var route = [];
 //var timeInterval = 1; //seconds
 var allowedAccuracy = 0;
 var simplifiedDistance = 25;
-var map; //The map from Google Maps API
+var map, path, markers=[]; //The map from Google Maps API  
 var trackID,name;
 
-//var button1 = document.getElementById("SSButton").innerHTML;
+var testRoute = [
+                {lat: -37.8749511, lng: 145.0469304, acc: 30, time: 1444815293599},
+                {lat: -37.8749611, lng: 145.0464004, acc: 30, time: 1444815293599},
+                {lat: -37.8749711, lng: 145.0469704, acc: 30, time: 1444815293599},
+                {lat: -37.8749911, lng: 145.0469404, acc: 30, time: 1444815293599},
+                {lat: -37.8136, lng: 144.9631, acc: 30, time: 1444870000000},
+                ];
 
-//document.getElementById("outputArea").innerHTML = "jkgiklgiuyyg";
 
 function trackLocation(){
     if (navigator.geolocation)
@@ -21,8 +26,7 @@ function trackLocation(){
     trackID = navigator.geolocation.watchPosition(showCurrentLocation, errorHandler, positionOptions);
     }
     
-    function errorHandler(error)
-    {
+    function errorHandler(error){
         if(error.code == 0){
            console.log("Tacking - Unknown error")}
         if(error.code == 1){
@@ -33,17 +37,17 @@ function trackLocation(){
            console.log("Tacking - Timed out")}
     }
 
-    function showCurrentLocation(position)
-    {   var currentLoc;
+    function showCurrentLocation(position){   
+        var currentLoc;
     
     currentLoc = {
     lat:Number(position.coords.latitude),
     lng:Number(position.coords.longitude),
-    //acc:Number(position.coords.accuracy),
+    acc:Number(position.coords.accuracy),
     time:time()};
     
-    document.getElementById("outputArea").innerHTML="</br>Lat: "+currentLoc.lat+"</br></br>Lng: "+currentLoc.lng;
-    document.getElementById("RLOutput").innerHTML="</br>Route Length: " + route.length;
+    document.getElementById("outputArea").innerHTML="</br>Lat: "+currentLoc.lat+"</br>Lng: "+currentLoc.lng + "</br>Acc: " +currentLoc.acc;
+    document.getElementById("outputSave").innerHTML="</br>Route Length: " + route.length;
     
     route.push(currentLoc);
     displayPath(route);
@@ -76,7 +80,7 @@ function trackingToggle(){
             //trackingLocation(route, timeInterval); //Starting tracking the position at the timeInterval
             trackLocation()
             document.getElementById("SSButton").innerHTML = "STOP";
-            document.getElementById("SSButton").style.background = "rgb(244, 67, 54)"
+            document.getElementById("SSButton").style.background = "rgb(244, 67, 54)";
             console.log("Tracking-On")
         }
     
@@ -94,17 +98,18 @@ function trackingToggle(){
      } //END trackingToggle
     
     function displayPath(route){
-    var path, coords, startPoint;
+    var coords, view, startPoint;
     
         //Puts a marker at the start point
     startPoint = new google.maps.Marker({
                 position: route[0],
-                map: map,
-                title: "Start Point"
+                map: map
             });
+        //Pushes startPoint into an array so it can be deleted
+        markers.push(startPoint);
     
         //pans to the newest location
-        var view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
+        view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
         // makes a latlng that google needs
         map.panTo(view); //pans to new point
         
@@ -114,7 +119,6 @@ function trackingToggle(){
     
     path = new google.maps.Polyline({
                 path: coords,
-                geodesic: true,
                 strokeColor: '#FF0000',
                 strokeOpacity: 5.0,
                 strokeWeight: 5,
@@ -127,87 +131,176 @@ function trackingToggle(){
 }//END displayPath
     
     function endMarker(route){
- var endPoint;
-    
+        var endPoint;
+        
     endPoint = new google.maps.Marker({
         position: route[route.length - 1],
-        map: map,
-        title: "End Point"
+        map: map
     })
+    markers.push(endPoint);
+    
 }//END endMarker
+    
+function clearMap(){
+    console.log("Cleared Map");
+    
+    //Clears markers
+    setMapOnAll(null);
+    markers = [];
+    
+    //Clear Polyline
+    path.setMap(null);
+    
+    function setMapOnAll(gmap) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(gmap);
+  }}
+}//END clearMap()
             
 function totalDistance(route){
     var distance = 0;
     
-    for (i=0;i<=(route.length - 1);i++){
-        distance = distance + distance2Points(i, i+1);                        
+    //distance = distance2Points(route[0], route[route.length -1])
+    
+    for (i=0;i<=(route.length - 2);i++){
+        distance = distance + distance2Points(route[i],route[i+1]);                        
     }                    
     
     return distance; //in meters
     
     function distance2Points(start, end){
-    var R = 6371000, a, c, distance, lat1, lat2, lng1, lng2; // metres
-    
-    lat1 = start.lat; lng1 = start.lng;
-    lat2 = end.lat; lng2 = end.lng;
-    
-var x1 = lat1.toRadians();
-var x2 = lat2.toRadians();
-var dx = (lat2-lat1).toRadians();
-var dy = (lng2-lng1).toRadians();
-
-    a = Math.sin(dx/2) * Math.sin(dx/2) + Math.cos(x1) * Math.cos(x2) * Math.sin(dy/2) * Math.sin(dy/2);
-    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
- distance = R * c;
+		var t1, n1, t2, n2, lat1, lon1, lat2, lon2, dlat, dlon, a, c, dk, m;
+        var Rk = 6373;
+		
+		// get values for lat1, lon1, lat2, and lon2
+		t1 = start.lat;
+		n1 = start.lng;
+		t2 = end.lat;
+		n2 = end.lng;
+		
+		// convert coordinates to radians
+		lat1 = deg2rad(t1);
+		lon1 = deg2rad(n1);
+		lat2 = deg2rad(t2);
+		lon2 = deg2rad(n2);
+		
+		// find the differences between the coordinates
+		dlat = lat2 - lat1;
+		dlon = lon2 - lon1;
+		
+		// here's the heavy lifting
+		a  = Math.pow(Math.sin(dlat/2),2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon/2),2);
+		c  = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a)); // great circle distance in radians
+		dk = c * Rk; // great circle distance in km
+		
+		// convert to meters
+		
+		m = dk*1000;
+		
+		// return result in meters
+		
+		return m;
+	}
+	
+	
+	// convert degrees to radians
+	function deg2rad(deg) {
+		rad = deg * Math.PI/180; // radians = degrees * pi/180
+		return rad;
+	}
+        
+        
     }
-}
+
 
 function duration(route){
-    var time = route[route.length - 1].time - route[0].time; // In Millerseconds
-        
+    var time;
+    
+        time = (route[route.length -1]).time - route[0].time; // In Millerseconds
         time = time*0.001;
         
     return time;      //in seconds                  
 }
                         
 function averageSpeed(time, distance){
-        var speed = distance/time; // should be in meters/second
+        var speed;
+    
+    speed = distance/time; // should be in meters/second
+    
+    return speed;
     
 }
 
-function calloriesBurnt(duration){
+function caloriesBurnt(duration){
     var m = 75; //average weight = ~75kg
     var calBurn;
     
-    calBurn = m*duration*0.12*(1/60) //to convert to minutes
+    duration = duration/60; //to convert to minutes
+    
+    calBurn = m * duration * 0.12; //Coefficient to convert to Calories Aparently
     
     return calBurn;
 }
 
 
-function saveToMemory(route){
-    var name;
+function saveToMemory(){
+    var name,inputSave, outputSave,store;
+    var distance, time, speed, burnt;
+    
+    
+    
+    //document.getElementById("input1").innerHTML;
+    //document.getElementById("outputSave").innerHTML;
+    
+    //document.getElementById("outputSave").innerHTML = "Test";
     
     // check for a route then save it to LocalStorage using JSON.stringify
+    if (route == []){
+    document.getElementById("outputSave").innerHTML = "There is not Route to Save!"; 
+     return;
+    }
     
     //Check if the route is ongoing
     if (isTracking == true) {
-        	console.log('Please stop tracking before exiting');
-        	return false;
-        }
-    //Enter a name for saving the route
+    document.getElementById("outputSave").innerHTML = "Please stop tracking before exiting";
+        	return;
+    }
     
-    //name = document.getElementById("input1").innerHTML
+    //Check That a name for the Route has been Entered
+    if (document.getElementById("input1").innerHTML === ""){
+    document.getElementById("outputSave").innerHTML = "Please enter a Name";
+    return;
+    }
+    else{
+     name = document.getElementById("input1").innerHTML;   
+    }
+    
+    //Values added to the stored Route to be displayed\
+    
+    distance = totalDistance(route);
+    time = duration(route);
+    speed = averageSpeed(time,distance);
+    burnt = caloriesBurnt(time);
     
     //the object to be stored
-    var store = {
+        store = {
     			name: name,
+                distance: distance,
+                duration: time,
+                speed: speed,
+                burnt: burnt,
     			route: route};
-    //Storing the object
-    localStorage.setItem('Route' + localStorage.length, JSON.stringidy(store));
     
-    return true
+    console.log(store)
+    
+    
+    //Storing the object
+    localStorage.setItem(name, JSON.stringify(store));
+    
+    //reset route
+    //route = [];
+    
+    document.getElementById("outputSave").innerHTML = "Save Successful!"
     
 }
 

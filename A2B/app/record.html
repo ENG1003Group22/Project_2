@@ -77,10 +77,8 @@
         margin: 20px;
     
 }
-       #SSbutton{
-       font-size: 40px;
-       }
        
+        
        .button{
         height:100px; 
         width:250px; 
@@ -95,7 +93,7 @@
            width:400px; 
            margin:20px;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-size: 22px;
+    font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0;
@@ -116,8 +114,8 @@
 <!-- Simple header with fixed tabs. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
-            <div class="title" >
-                <!-- Title -->JUST DO IT
+            <div class="title">
+<!-- Title -->JUST DO IT
             </div>
 <!-- Tab Bar -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
@@ -137,18 +135,16 @@
                     <div class="button_card">
                     <!-- Start and Stop Button  -->
                         <span>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" id="SSButton" onclick="trackingToggle()" style="background:rgb(76, 175, 80)">Start</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" id="SSButton" onclick="trackingToggle()" style="background:rgb(76, 175, 80);font-size:40px;">Start</button>
                         </span>
                         <!-- Clear Button  -->
                         <span>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="SSButton" style="height:100px; width:250px; margin:20px;" onclick="trackLocation()">TestLoc</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="ClearButton" onclick="clearMap()"style="height:100px; width:250px; margin:20px;font-size:40px;">Clear</button>
                         </span>
                         <!-- Save Button  -->
                         <span>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="SSButton"style="height:100px; width:250px; margin:20px" onclick="displayPath(route)">Display</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="saveToMemory()" style="height:100px; width:250px; margin:20px;background:rgb(255, 87, 34);font-size:40px;" >Save</button>
                         </span>
-                        
-                        
                         
                         </div>
                         <!--  OutputArea-->
@@ -156,17 +152,17 @@
                     
                             
                             <!--  Textfield -->
-                    <span id="outputArea" class= "textOutputArea">
+                    <span class= "textOutputArea">
 <form action="#">
   <span class="mdl-textfield mdl-js-textfield">
     <input class="mdl-textfield__input" type="text" id="input1" />
-    <label class="mdl-textfield__label" for="sample1" style="color:rgb(255,255,255);text-align: center">Name...</label><span id="RLOutput"></br>Route Length:</span>
+    <label class="mdl-textfield__label" for="input1" style="color:rgb(255,255,255);text-align: center">Name...</label><Span></br></Span><span id="outputSave">Route Length: Not Tracking</span>
   </span>
 </form>
-</span>    
+</span>    <!--  Textfield -->
                             
-                            <span id="outputArea" class= "textOutputArea">
-                        <span ></br>Lat: </br></br>Lng: </span></span>
+                            <span  class= "textOutputArea">
+                        <span id="outputArea"></br>Lat: Not Tracking</br>Lng: Not Tracking</br>Acc: Not Tracking</span></span>
                             
                             
                     </div>
