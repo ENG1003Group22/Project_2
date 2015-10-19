@@ -1,76 +1,125 @@
 //Download Data from Local Storage
 
-var i = 0, dataPDO = [], sKey;
+var i = 0, dataPDO = [], Key,htmltable,rowChecked = null;
 
-for (; sKey = window.localStorage.key(i); i++) {
-    dataPDO[sKey] = JSON.parse(localStorage.getItem(sKey));
+for (; Key = window.localStorage.key(i); i++) {
+    dataPDO[i] = JSON.parse(localStorage.getItem(Key));
+    console.log(dataPDO[i]);
 }
 
-var myTable= "<table><tr><td style='width: 100px; color: red;'>Col Head 1</td>";
-    myTable+= "<td style='width: 100px; color: red; text-align: right;'>Col Head 2</td>";
-    myTable+="<td style='width: 100px; color: red; text-align: right;'>Col Head 3</td></tr></table>"
-document.getElementById("tableOutput").innerHTML = myTable
-    
-    
-console.log(dataPDO);
+tableBuilding(dataPDO)
 
-var htmltable;
+$( "input" ).on( "click", function() {
+  $( "#outputArea" ).html( "Row " + $( "input:checked" ).val() + " is checked" );
+    
+    rowChecked = $( "input:checked" ).val();
+});
 
 function tableBuilding(dataPDO){
-    
-    var endOfTable = "</tbody></table>";
     //output = document.getElementById("tableOutput").innerHTML;
     
-    htmltable = "<table><thead><tr><th>Name</th><th>Distance</th><th>Duration</th><th>Speed</th><th>Calories Burnt</th></tr></thead><tbody>";
+    htmltable = "<thead><tr><th>Selected</th><th>Name</th><th>Distance (m)</th><th>Duration (Mins)</th><th>Speed (Km/h)</th><th>Calories Burnt</th></tr></thead><tbody>";
     
+    if(dataPDO.length == 0){
+        htmltable +="<tr><td>---</td><td>No Routes Stored</td><td>---</td><td>---</td><td>---</td><td>---</td></tr>";
+    }
+    else {
+        
     for (i in dataPDO){
+    htmltable +="<tr><td><input type='radio' name='radio' value='"+i+"'></td><td>"+dataPDO[i].name+"</td><td>"+dataPDO[i].distance+"</td><td>"+dataPDO[i].duration+ "</td><td>"+dataPDO[i].speed+"</td><td>"+dataPDO[i].burnt+"</td></tr>";
         
- //   htmltable +="<tr><td>"+dataPDO[i].name+"</td><td>"+dataPDO[i].distance+"</td><td>"+dataPDO[i].duration+ "</td></td>"+dataPDO[i].speed+"</td></td>"+dataPDO[i].burnt+"</td></tr>";
-        
+        }
     }
     
-    htmltable += endOfTable;
+    htmltable += "</tbody>";
     
-    document.getElementById("tableOutput").innerHTML = htmltable;
+    document.getElementById('tableOutput').innerHTML = htmltable;
 }
 
+function deleteRow(){
+    
+    
+    if (dataPDO.length == 0){
+        $( "#outputArea" ).html("No Run to Delete");
+    
+    }
+    else if (rowChecked == null){
+        $( "#outputArea" ).html("No Run Selected");
+    }
+    else{
+        
+        $( "#outputArea" ).html(dataPDO[rowChecked].name + " Deleted From Storage");
+        
+        localStorage.removeItem(dataPDO[rowChecked].name);
+        
+        
+    }
+  
+    
+}
 
+function displayRow(){
+    
+    var view, startPoint, endPoint, route;
+    
+    if (dataPDO.length == 0){
+        $( "#outputArea" ).html("No Run to Display");
+    
+    }
+    else if (rowChecked == null){
+        $( "#outputArea" ).html("No Run Selected to Display");
+    }
+    else{
+    route = dataPDO[rowChecked].route
+    
+        //Puts a marker at the start point
+        startPoint = new google.maps.Marker({
+                position: route[0],
+                icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                map: map
+            });
+        //Pushes startPoint into an array so it can be deleted
+        //markers.push(startPoint);
+    
+    //Puts a marker at the start point
+        endPoint = new google.maps.Marker({
+                position: route[route.length - 1],
+                map: map
+            });
+        //Pushes endPoint into an array so it can be deleted
+        //markers.push(endPoint);
+        
+        // makes a latlng that google needs
+        view = new google.maps.LatLng(route[route.length-1].lat,route[route.length-1].lng)
+        //pans to new point
+        map.panTo(view); 
+    
+    path = new google.maps.Polyline({
+                path: route,
+                strokeColor: '#FF0000',
+                strokeOpacity: 5.0,
+                strokeWeight: 5,
+                fillColor:'#FF0000',
+                fillOpacity:1
+            });
+            
+        //Push path into array so that it can be deleted
+        //paths.push(path);
+        
+        //Display path
+        path.setMap(map);
+        $( "#outputArea" ).html("Run " + dataPDO[rowChecked].name + " Displayed");
+    }
+    
+}
 
-/*
-
-<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Name</th>
-      <th>Distance</th>
-      <th>Duration</th>
-        <th>Speed</th>
-    <th>Calories Burnt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-      <td>25</td>
-      <td>$2.90</td>
-        <td>$2.90</td>
-        <td>$2.90</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-      <td>50</td>
-      <td>$1.25</td>
-        <td>$2.90</td>
-        <td>$2.90</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-      <td>10</td>
-      <td>$2.35</td>
-        <td>$2.90</td>
-        <td>$2.90</td>
-    </tr>
-  </tbody>
-</table>
-
-*/
+function initMap() {            
+    
+            //Actual Map -- https://developers.google.com/maps/documentation/javascript/
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: -37.8749147,
+                    lng: 145.0468735
+                },
+                zoom: 17
+            })};

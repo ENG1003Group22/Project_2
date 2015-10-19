@@ -6,11 +6,7 @@
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
 
-    <!-- Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
     
-    <!-- jScript Link -->
-        <script src="js/code.js"></script>
     
     <!-- Css Link -->
     <link rel="stylesheet" href="css/styles.css">
@@ -18,8 +14,8 @@
    <style>
     .title {
         text-align: center;
-        height: 2.5%;
-        padding-top: 2.5%;
+        height: 25px;
+        padding-top: 25px;
         font-size: 20px;
         line-height: 1;
         letter-spacing: 0.2em;
@@ -105,6 +101,14 @@
            border-color:black;
            
        }
+       #outputSave{
+            font-size: 20px;
+        }
+        #outputArea{
+            font-size: 20px;
+            line-height: 120%;
+        }
+       
  </style>
     
 </head>
@@ -156,7 +160,7 @@
 <form action="#">
   <span class="mdl-textfield mdl-js-textfield">
     <input class="mdl-textfield__input" type="text" id="input1" />
-    <label class="mdl-textfield__label" for="input1" style="color:rgb(255,255,255);text-align: center">Name...</label><Span></br></Span><span id="outputSave">Route Length: Not Tracking</span>
+    <label class="mdl-textfield__label" for="input1" style="color:rgb(255,255,255);text-align: center;font-size: 20px;">Name...</label><Span></br></Span><span id="outputSave">Route Length: Not Tracking</span>
   </span>
 </form>
 </span>    <!--  Textfield -->
@@ -176,5 +180,11 @@
 
 
 </body>
+
+<!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
+    
+    <!-- jScript Link -->
+        <script src="js/code.js"></script>
 
 </html>

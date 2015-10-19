@@ -1,26 +1,19 @@
 //variables Common to all functions
 var isTracking = false; //The Website will start tracking the user
-var route = [
-                {lat: -37.8749511, lng: 145.0469304, acc: 30, time: 1444815293599},
-                {lat: -37.8749611, lng: 145.0464004, acc: 30, time: 1444815293599},
-                {lat: -37.8749711, lng: 145.0469704, acc: 30, time: 1444815293599},
-                {lat: -37.8749911, lng: 145.0469404, acc: 30, time: 1444815293599},
-                {lat: -37.8136, lng: 144.9631, acc: 30, time: 1444870000000},
-                ];
+var route = [];
 //var timeInterval = 1; //seconds
 var allowedAccuracy = 0;
 var simplifiedDistance = 25;
 var map, path, markers=[], paths=[]; //The map from Google Maps API  
 var trackID,name;
 
-var testRoute = [
+var routeasd = [
                 {lat: -37.8749511, lng: 145.0469304, acc: 30, time: 1444815293599},
                 {lat: -37.8749611, lng: 145.0464004, acc: 30, time: 1444815293599},
                 {lat: -37.8749711, lng: 145.0469704, acc: 30, time: 1444815293599},
                 {lat: -37.8749911, lng: 145.0469404, acc: 30, time: 1444815293599},
                 {lat: -37.8136, lng: 144.9631, acc: 30, time: 1444870000000},
                 ];
-
 
 function trackLocation(){
     if (navigator.geolocation)
@@ -51,13 +44,15 @@ function trackLocation(){
     lng:Number(position.coords.longitude),
     acc:Number(position.coords.accuracy),
     time:time()};
+        
+        //breaks function if the accuracy of the position is too low
+        if (currentLoc.acc >= 50){return}
     
     document.getElementById("outputArea").innerHTML="</br>Lat: "+currentLoc.lat+"</br>Lng: "+currentLoc.lng + "</br>Acc: " +currentLoc.acc;
-    document.getElementById("outputSave").innerHTML="</br>Route Length: " + route.length;
+    document.getElementById("outputSave").innerHTML="Route Length: " + route.length;
     
     route.push(currentLoc);
     displayPath(route);
-    console.log(currentLoc);
     
      function time(){
          var d = new Date();
@@ -78,7 +73,6 @@ function trackingToggle(){
             document.getElementById("SSButton").style.background = "rgb(76, 175, 80)"
             //saveToMemory(route); //Saves to memory for use in the "history" tab
             endMarker(route) // Plots the endpoint on the map
-            route = []; // Clears the route so that anothing route can be recorded
             console.log("Tracking-Off")
 		}
         else{
@@ -109,6 +103,7 @@ function trackingToggle(){
         //Puts a marker at the start point
         startPoint = new google.maps.Marker({
                 position: route[0],
+                icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
                 map: map
             });
         //Pushes startPoint into an array so it can be deleted
@@ -242,6 +237,8 @@ function averageSpeed(time, distance){
     
     speed = distance/time; // should be in meters/second
     
+    speed = speed * 3.6; // In Km/h
+    
     return speed;
     
 }
@@ -262,40 +259,39 @@ function saveToMemory(){
     var name,inputSave, outputSave,store;
     var distance, time, speed, burnt;
     
-    
-    
-    //inputSave = document.getElementById("input1").innerHTML;
-    //outputSave = document.getElementById("outputSave").innerHTML;
+    inputSave = document.getElementById("input1").value;
+    outputSave = document.getElementById("outputSave").innerHTML;
     
     // check for a route then save it to LocalStorage using JSON.stringify
-    if (route == []){
-    document.getElementById("outputSave").innerHTML = "There is not Route to Save!"; 
-     return;
+    if (route.length === 0){
+    outputSave = "There is no Route to Save!";
+        alert("There is no Route to Save")
+        return;
     }
     
     //Check if the route is ongoing
     if (isTracking == true) {
-    document.getElementById("outputSave").innerHTML = "Please stop tracking before exiting";
-        	return;
+    outputSave = "Please stop tracking before Saving";
+        return;
     }
     
     //Check That a name for the Route has been Entered
-    if (document.getElementById("input1").value == ""){
-    document.getElementById("outputSave").innerHTML = "Please enter a Name";
-        console.log(document.getElementById("input1").innerHTML);
+    if (inputSave == ""){
+    outputSave = "Please enter a Name";
+        alert("Please Enter a Name")
     return;
     }
     else{
-     name = document.getElementById("input1").value;   
-        console.log(name);
+    name = inputSave;   
+    console.log(name);
     }
     
     //Values added to the stored Route to be displayed\
     
-    distance = totalDistance(route);
-    time = duration(route);
-    speed = averageSpeed(time,distance);
-    burnt = caloriesBurnt(time);
+    distance = totalDistance(route).toFixed(4);
+    time = duration(route).toFixed(4);
+    speed = averageSpeed(time,distance).toFixed(4);
+    burnt = caloriesBurnt(time).toFixed(4);
     
     //the object to be stored
         store = {
@@ -304,7 +300,8 @@ function saveToMemory(){
                 duration: time,
                 speed: speed,
                 burnt: burnt,
-    			route: route};
+    			route: route
+                };
     
     console.log(store)
     
@@ -313,7 +310,7 @@ function saveToMemory(){
     localStorage.setItem(name, JSON.stringify(store));
     
     //reset route
-    //route = [];
+    route = [];
     
     document.getElementById("outputSave").innerHTML = "Save Successful!"
     
