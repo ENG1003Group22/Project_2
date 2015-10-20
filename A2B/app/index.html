@@ -4,96 +4,103 @@
     <!-- Material Design Lite -->
     <script src="mdl/material.min.js"></script>
     <link rel="stylesheet" href="mdl/material.min.css">
-    
-    <!-- jScript Link -->
-        <script src="js/index_functions.js"></script>
-    
+
     <!-- Css Link -->
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 
-   <style>
-    .title {
-        text-align: center;
-        height: 25px;
-        padding-top: 25px;
-        font-size: 20px;
-        line-height: 1;
-        letter-spacing: 0.2em;
-        font-weight: 200;
-    }
-       
-       .text{
-           text-align: center;
-           padding: 2% 10% 10% 10%;
-           font-size: 20px;
-           font-family: "Helvetica","Arial",sans-serif;
-       }
-       .text-heading{
-           text-align: center;
-           font-size: 35px;
-           font-family: "Helvetica","Arial",sans-serif;
-       }
-       .text-body{
+    <style>
+        .title {
+            text-align: center;
+            height: 25px;
+            padding-top: 25px;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.2em;
+            font-weight: 200;
+        }
+        
+        .text {
+            text-align: center;
+            padding: 2% 10% 10% 10%;
+            font-size: 20px;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+        
+        .text-heading {
+            text-align: center;
+            font-size: 35px;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+        
+        .text-body {
             text-align: left;
             line-height: 135%;
-           font-family:  "Helvetica","Arial",sans-serif;
-       
-       }
-        
- </style>
-    
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+    </style>
+
 </head>
 
 <body>
 
-<!-- Simple header with fixed tabs. -->
+    <!-- Simple header with fixed tabs. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
             <div class="title">
-<!-- Title -->JUST DO IT
+                <!-- Title -->JUST DO IT
             </div>
-<!-- Tab Bar -->
+            <!-- Tab Bar -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Guide</a>
                 <a href="#fixed-tab-2" onClick="location.href='record.html'" class="mdl-layout__tab">Run</a>
                 <a href="#fixed-tab-3" onClick="location.href='view.html'" class="mdl-layout__tab">History</a>
             </div>
-        </header> 
-        
+        </header>
+
         <main class="mdl-layout__content">
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
                 <div class="page-content">
-<!-- TAB_1 || GUIDE -->
-                    <div class= "text">
-                        <span class="text-body">This application will help you records all your running activities, it will locate your place and show it on the map. It will give you a polylines from starting point to the end point of your run. In history tab it will show you how much calories you have burnt, Average speed of your run, running duration, total distance.</span><br><br>
-                       <span class="text-heading"><b>How to use guide : </b></span><br><br>
-                        <span class="text-body">1.Open Run tab</span><br>
-                        <span class="text-body">2. Press Start to run</span><br>
-                        <span class="text-body"> 3. Press Stop when stop running</span><br>
-                        <span class="text-body">4. Press Reset to start a new run</span><br>
-                        <span class="text-body">5. Press Save to save your running</span><br><br><br>   
-                        <span class="text-heading"><b>History Guide : </b></span><br><br>
-                        <span class="text-body">1.Open History Tab</span><br>
-                        <span class="text-body">2. Select any recorded data</span><br>
-                        <span class="text-body">2. Press display to display selected data</span><br>
-                        <span class="text-body"> 3. Press delete to delete selected record</span>
+                    <!-- TAB_1 || GUIDE -->
+                    <div class="text">
 
-<!--
-                        <br><br> 1.Open Run tab
-                        <br style="padding:2px"> 2. Press Start to run
-                        <br> 3. Press Stop to stop running
-                        <br> 4. Press Reset if you are not happy with your result
-                        <br> 5. Press Save to save your running
-                        <br> <b>Fucking Shia LaBeouf Eyyyy</b>
--->
+                        <span class="text-body">This application will help you records all your running activities, it will track your location and display your route on a map, with a green marker placed and your start point and a red marker placed at the end point. In the history tab, all saved runs will be shown, displaying the duration, distance, average speed and calories burnt of your run.</span>
+                        <br>
+                        <br>
+                        <span class="text-heading"><b>How to Record your Run : </b></span>
+                        <br>
+                        <br>
+                        <span class="text-body">1.Open the Run tab</span>
+                        <br>
+                        <span class="text-body">2. Press 'Start' to run</span>
+                        <br>
+                        <span class="text-body"> 3. Press 'Stop' when stop running</span>
+                        <br>
+                        <span class="text-body">4. Press 'Clear' to clear the Map</span>
+                        <br>
+                        <span class="text-body">5. Press 'Save' to save your route</span>
+                        <br>
+                        <br>
+                        <br>
+                        <span class="text-heading"><b>How to display a Recorded Route : </b></span>
+                        <br>
+                        <br>
+                        <span class="text-body">1.Open the History Tab</span>
+                        <br>
+                        <span class="text-body">2. Select any recorded run</span>
+                        <br>
+                        <span class="text-body">2. Press 'Display' to display selected Route</span>
+                        <br>
+                        <span class="text-body"> 3. Press 'Delete' to delete selected Route</span>
+
                     </div>
-                    
+
                 </div>
             </section>
-       
+
         </main>
     </div>
 
 
 </body>
+
 </html>

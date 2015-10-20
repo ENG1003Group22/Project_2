@@ -3,175 +3,158 @@
 <head>
     <title>Run</title>
     <!-- Material Design Lite -->
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
-
-    
-    
+    <script src="mdl/material.min.js"></script>
+    <link rel="stylesheet" href="mdl/material.min.css">
     <!-- Css Link -->
     <link rel="stylesheet" href="css/styles.css">
-    
-   <style>
-    .title {
-        text-align: center;
-        height: 25px;
-        padding-top: 25px;
-        font-size: 20px;
-        line-height: 1;
-        letter-spacing: 0.2em;
-        font-weight: 200;
-    }
-       
-       .map { 
-           height: 100%;
-       }
-       
-       .map_card {
-    /*display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    font-size: 16px;
-    font-weight: 400;
-    min-height: 200px;
-    z-index: 1;
-    box-sizing: border-box;
-    overflow: hidden;*/
-    width: 100%%;
-    height:65%;
-    padding: 10px;
-    background: rgb(76, 175, 80);
-    border-radius: 2px;
-}
-      .card_holder{
-            float: right;
-           width: 100%;
-           background: rgb(63,81,181)
-           
-       }
-       
-       .button_card {
-    width: auto;
-    height:auto;
-    background: rgb(158, 158, 158);
-    border-radius: 2px;
-           float: left;
-           margin: 20px;
-}
-       
-       .display_card{
-    width: auto;
-    height:auto;
-    background: rgb(158, 158, 158);
-    border-radius: 2px;
-    float: right;
-        margin: 20px;
-    
-}
-       
+
+    <style>
+        .title {
+            text-align: center;
+            height: 25px;
+            padding-top: 25px;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.2em;
+            font-weight: 200;
+        }
         
-       .button{
-        height:100px; 
-        width:250px; 
-        margin:20px;
-           background: rgb(63,81,181);
-       }
-       
-       .textOutputArea{
-           float: right; 
-           background: rgb(33, 150, 243); 
-           height:100px; 
-           width:400px; 
-           margin:20px;
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0;
-           color:rgb(255,255,255);
-           align-content: center;
-           text-align: center;
-           border-style: solid;
-           border-width: 1px;
-           border-color:black;
-           
-       }
-       #outputSave{
+        .map {
+            height: 100%;
+        }
+        
+        .map_card {
+            width: 100%%;
+            height: 65%;
+            padding: 10px;
+            background: rgb(76, 175, 80);
+            border-radius: 2px;
+        }
+        
+        .card_holder {
+            float: right;
+            width: 100%;
+            background: rgb(63, 81, 181)
+        }
+        
+        .button_card {
+            width: auto;
+            height: auto;
+            background: rgb(158, 158, 158);
+            border-radius: 2px;
+            float: left;
+            margin: 20px;
+        }
+        
+        .display_card {
+            width: auto;
+            height: auto;
+            background: rgb(158, 158, 158);
+            border-radius: 2px;
+            float: right;
+            margin: 20px;
+        }
+        
+        .button {
+            height: 100px;
+            width: 250px;
+            margin: 20px;
+            background: rgb(63, 81, 181);
+        }
+        
+        .textOutputArea {
+            float: right;
+            background: rgb(33, 150, 243);
+            height: 100px;
+            width: 400px;
+            margin: 20px;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            color: rgb(255, 255, 255);
+            align-content: center;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            border-color: black;
+        }
+        
+        #outputSave {
             font-size: 20px;
         }
-        #outputArea{
+        
+        #outputArea {
             font-size: 20px;
             line-height: 120%;
         }
-       
- </style>
-    
+    </style>
+
 </head>
 
 <body>
 
-<!-- Simple header with fixed tabs. -->
+    <!-- Simple header with fixed tabs. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
             <div class="title">
-<!-- Title -->JUST DO IT
+                <!-- Title -->JUST DO IT
             </div>
-<!-- Tab Bar -->
+            <!-- Tab Bar -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" onClick="location.href='index.html'" class="mdl-layout__tab">Guide</a>
                 <a href="#fixed-tab-2" class="mdl-layout__tab is-active">Run</a>
                 <a href="#fixed-tab-3" onClick="location.href='view.html'" class="mdl-layout__tab">History</a>
             </div>
-        </header> 
-        
+        </header>
+
         <main class="mdl-layout__content">
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-2">
                 <div class="page-content">
-<!-- TAB_2 || RUN  -->
-                    <div class="map_card"><div class="map" id="map"></div></div>
-                    
+                    <!-- TAB_2 || RUN  -->
+                    <div class="map_card">
+                        <div class="map" id="map"></div>
+                    </div>
+
                     <div class="card_holder">
-                    <div class="button_card">
-                    <!-- Start and Stop Button  -->
-                        <span>
+                        <div class="button_card">
+                            <!-- Start and Stop Button  -->
+                            <span>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent button" id="SSButton" onclick="trackingToggle()" style="background:rgb(76, 175, 80);font-size:40px;">Start</button>
                         </span>
-                        <!-- Clear Button  -->
-                        <span>
+                            <!-- Clear Button  -->
+                            <span>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="ClearButton" onclick="clearMap()"style="height:100px; width:250px; margin:20px;font-size:40px;">Clear</button>
                         </span>
-                        <!-- Save Button  -->
-                        <span>
+                            <!-- Save Button  -->
+                            <span>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="saveToMemory()" style="height:100px; width:250px; margin:20px;background:rgb(255, 87, 34);font-size:40px;" >Save</button>
                         </span>
-                        
+
                         </div>
                         <!--  OutputArea-->
                         <div class="display_card">
-                    
-                            
+
+
                             <!--  Textfield -->
-                    <span class= "textOutputArea">
+                            <span class="textOutputArea">
 <form action="#">
   <span class="mdl-textfield mdl-js-textfield">
     <input class="mdl-textfield__input" type="text" id="input1" />
-    <label class="mdl-textfield__label" for="input1" style="color:rgb(255,255,255);text-align: center;font-size: 20px;">Name...</label><Span></br></Span><span id="outputSave">Route Length: Not Tracking</span>
-  </span>
-</form>
-</span>    <!--  Textfield -->
-                            
-                            <span  class= "textOutputArea">
+    <label class="mdl-textfield__label" for="input1" style="color:rgb(255,255,255);text-align: center;font-size: 20px;">Name...</label><Span></br></Span><span id="outputSave"></span>
+                            </span>
+                            </form>
+                            </span>
+                            <!--  Textfield -->
+
+                            <span class="textOutputArea">
                         <span id="outputArea"></br>Lat: Not Tracking</br>Lng: Not Tracking</br>Acc: Not Tracking</span></span>
-                            
-                            
-                    </div>
-                        
-                   
+
+
+                        </div>
+
+
                     </div>
                 </div>
             </section>
@@ -182,9 +165,9 @@
 </body>
 
 <!-- Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
-    
-    <!-- jScript Link -->
-        <script src="js/code.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
+
+<!-- jScript Link -->
+<script src="js/code.js"></script>
 
 </html>

@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <!-- Material Design Lite -->
+    <script src="mdl/material.min.js"></script>
+    <link rel="stylesheet" href="mdl/material.min.css">
+
+    <style>
+        .title {
+            text-align: center;
+            height: 25px;
+            padding-top: 25px;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.2em;
+            font-weight: 200;
+        }
+        
+        .text {
+            text-align: center;
+            padding: 2% 10% 10% 10%;
+            font-size: 20px;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+        
+        .text-heading {
+            text-align: center;
+            font-size: 35px;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+        
+        .text-body {
+            text-align: left;
+            line-height: 135%;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+            <div class="title">
+                <!-- Title -->JUST DO IT
+            </div>
+        </header>
+
+        <div style="text-align:center;background:rgb(76, 175, 80);height:200%%">
+
+            <img src="image/loginpic.jpg" style="display:block;margin: 0 auto; width:65%">
+
+            <!-- Username -->
+            <div>
+                </br>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="user" style="color:white" />
+                <label class="mdl-textfield__label" for="sample1" style="color:white;text-align:center;font-size:25px;">Username</label>
+            </div>
+
+
+
+            <!-- Password -->
+
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="pass" style="color:white" />
+                <label class="mdl-textfield__label" for="sample1" style="color:white;text-align:center;font-size:25px;">Password</label>
+            </div>
+
+            <div id="errorOutput" style="color:red;font-size:25px;margin-bottom:20px"></div>
+
+            <div>
+                <!-- Accent-colored raised button with ripple -->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="height:100px; width:250px;font-size:40px" onclick="login()">
+                    Login
+                </button>
+            </div>
+
+            <div style="font-size:40px;color:white;">
+                </br>
+                </br>Username:Abandon_Hope</br>
+                </br>
+                </br>Password:All_Yee_Who_Enter</div>
+            <div style="font-size:30px;color:white;">
+                </br>
+                </br>Enjoy the Latest Fitness Technology with this Revolutionary Web-App!</br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+<script src="js/login.js"></script>
+
+</html>

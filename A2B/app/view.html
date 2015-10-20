@@ -3,96 +3,87 @@
 <head>
     <title>History</title>
     <!-- Material Design Lite Link -->
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
-
-    
-    
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>  
-    <!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-     
+    <script src="mdl/material.min.js"></script>
+    <link rel="stylesheet" href="mdl/material.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!-- Css Link -->
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .title {
+            text-align: center;
+            height: 25px;
+            padding-top: 25px;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: 0.2em;
+            font-weight: 200;
+        }
         
+        .tableHolder {
+            text-align: center;
+            margin: 20px;
+        }
         
-   <style>
-    .title {
-        text-align: center;
-        height: 25px;
-        padding-top: 25px;
-        font-size: 20px;
-        line-height: 1;
-        letter-spacing: 0.2em;
-        font-weight: 200;
-    }
-       
-       .tableHolder {
-           
-           text-align: center;
-           margin: 20px;      
-       
-       }
-       
-       .table {
-           padding: 5%;
-       }
-       
-       .map { 
-           height: 100%;
-       }
-       
-       .map_card {
-    
-    width: 100%%;
-    height:55%;
-    margin: 20px;
-    padding:10px;
-    background: rgb(76, 175, 80);
-    border-radius: 2px;
-}
- </style>
+        .table {
+            padding: 5%;
+        }
+        
+        .map {
+            height: 100%;
+        }
+        
+        .map_card {
+            width: 100%%;
+            height: 55%;
+            margin: 20px;
+            padding: 10px;
+            background: rgb(76, 175, 80);
+            border-radius: 2px;
+        }
+    </style>
     <style></style>
 </head>
 
 <body>
 
-<!-- Simple header with fixed tabs. -->
+    <!-- Simple header with fixed tabs. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
         <header class="mdl-layout__header">
             <div class="title">
-<!-- Title -->JUST DO IT
+                <!-- Title -->JUST DO IT
             </div>
-<!-- Tab Bar -->
+            <!-- Tab Bar -->
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
                 <a href="#fixed-tab-1" onClick="location.href='index.html'" class="mdl-layout__tab">Guide</a>
                 <a href="#fixed-tab-2" onClick="location.href='record.html'" class="mdl-layout__tab">Run</a>
                 <a href="#fixed-tab-3" class="mdl-layout__tab is-active">History</a>
             </div>
-        </header> 
-        
+        </header>
+
         <main class="mdl-layout__content">
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-3">
                 <div class="page-content">
-<!-- TAB_3 || History  -->
-                    
-<div class="tableHolder"><table id="tableOutput" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp" style="margin-left:auto;margin-right:auto;width:75%"></table></div>
-                    
+                    <!-- TAB_3 || History  -->
+
+                    <div class="tableHolder">
+                        <table id="tableOutput" class="mdl-data-table mdl-js-data-table mdl-shadow--4dp" style="margin-left:auto;margin-right:auto;width:75%"></table>
+                    </div>
+
                     <!-- Display Button -->
                     <div style="text-align:center;">
-                    
-<button id="Bdisplay" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="displayRow()"style="height:100px; width:250px; margin:20px;font-size:40px;">Display</button>
-                   
-                        <span style="height:100px; width:250px; margin:20px;font-size:40px;background: rgb(76, 175, 80);"> <span id="outputArea" ></span></span>
-                    
-<button id="Bdelete" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="deleteRow()"style="height:100px; width:250px; margin:20px;font-size:40px;">Delete</button>
-                        
-                        
-                        
+
+                        <button id="Bdisplay" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="displayRow()" style="height:100px; width:250px; margin:20px;font-size:40px;">Display</button>
+
+                        <button id="Bdelete" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="deleteRow()" style="height:100px; width:250px; margin:20px;font-size:40px;">Delete</button>
+                        <div><span style="height:100px; width:250px; margin:20px;font-size:40px;background: rgb(76, 175, 80);"> <span id="outputArea" ></span></span>
                         </div>
-                    
-                    <div class="map_card"><div class="map" id="map"></div></div>
-                    
-                    
+
+
+                    </div>
+
+                    <div class="map_card">
+                        <div class="map" id="map"></div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -100,11 +91,11 @@
 
 
 </body>
-        <!-- jScript Link -->
-        <script src="js/view.js"></script>
-    
-        <!-- Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
-    
-    
+<!-- jScript Link -->
+<script src="js/view.js"></script>
+
+<!-- Google Maps API -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap"></script>
+
+
 </html>
